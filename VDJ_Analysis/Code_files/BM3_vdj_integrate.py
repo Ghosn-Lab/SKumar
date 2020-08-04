@@ -1,19 +1,18 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Apr  9 16:17:57 2020
-
 @author: scsac
 """
 
 import csv
 
+# integrate mutation data from imgt files to normalized matrix
 def integrateMutations(inFileName, mutFileNames, outPath):
     fname = inFileName
     contigs = []
     with open(fname, 'r') as inFile:
         csvReader = csv.reader(inFile)
         contigs = next(csvReader)
-        
+    # read data from each mutation file for CDR1-3 and FR1-3    
     cdr3MutFName = mutFileNames[2]
     cdr3Content = []
     with open(cdr3MutFName, 'r') as cdr3File:
@@ -139,7 +138,7 @@ def integrateMutations(inFileName, mutFileNames, outPath):
     fr1TotalMuts[0] = "fr1_total_muts"
     fr1HSMuts[0] = "fr1_hs_muts"
     fr1NbHS[0] = "fr1_nb_hs"
-    
+    # append data to the normalized matrix copied to the output directory
     wFName = outPath
     with open(wFName, 'a+', newline = "") as writeFile:
         csvWriter = csv.writer(writeFile)

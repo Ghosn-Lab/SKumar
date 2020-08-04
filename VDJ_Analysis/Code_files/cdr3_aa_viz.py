@@ -1,18 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon May  4 00:42:13 2020
-
 @author: scsac
 """
 
 import json, os
-
+# generates the cdr3 aa treemap data
 def cdr3AAData(inFileName, outDir):
     fname = inFileName
     fileCont = []
-    with open(fname, 'r') as bm3_contig:
-        fileCont = bm3_contig.readlines()
-    
+    with open(fname, 'r') as contig_file:
+        fileCont = contig_file.readlines()
+    # root level is the chain, check for amino acid presence, v, d and j presence and barcode addition
     cdr3Info = {'name': 'chain', 'children': []}
     for barcode in fileCont:
         barCont = barcode.split(",")
@@ -45,7 +43,7 @@ def cdr3AAData(inFileName, outDir):
                 else:
                     isAA[0]['value'] = isAA[0]['value'] + 1
                     isAA[0]['barcodes'].append(barCont[0].split("-")[0])
-    
-    wfName = os.path.join(outDir, "cdr3_aa_data.json")
+    # write file to output directory
+    wfName = os.path.join(outDir, "CDR3_AA_Treemap", "data", "cdr3_aa_data.json")
     with open(wfName, 'w') as wFile:
         wFile.write(json.dumps(cdr3Info))

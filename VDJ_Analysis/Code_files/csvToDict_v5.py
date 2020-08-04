@@ -5,13 +5,13 @@ Spyder Editor
 This script generates a dictionary of mutations associated with a cell
 """
 import json, csv, os
-
+# processes the detailed mutation data for each barcode
 def mutationDataProcessing(inFileNames, outDir):
     fname = inFileNames[0]
     fileCont = []
     with open(fname, 'r') as seqH:
         fileCont = seqH.readlines()
-    
+    # get the mutation related to each contig
     contigDict = {}
     for entry in fileCont[1:]:
         contDet = entry.split(",")
@@ -33,12 +33,12 @@ def mutationDataProcessing(inFileNames, outDir):
                                          'isHS': contDet[6],
                                          'hsType': contDet[7],
                                          'isCoding': contDet[8]})
-    
+    # get the total mutation data from the base imgt output
     fname1 = inFileNames[1]
     totalFileCont = []
     with open(fname1, 'r') as seqH:
         totalFileCont = seqH.readlines()
-    
+    # generate cumulative results for mutations for the contigs
     allContigDict = {}
     for entry in totalFileCont[1:]:
         contDet = entry.split(",")
@@ -59,7 +59,7 @@ def mutationDataProcessing(inFileNames, outDir):
             allContigDict[contigId]['CDR2'] += int(contDet[381])
             allContigDict[contigId]['CDR3'] += int(contDet[382])
     
-    
+    # create region wise mutation info (CDR or FR)
     regionWiseInfo = {}
     hsTypeInfo = {'name': 'regions', 'children': []}
     for cell, muts in contigDict.items():
@@ -103,7 +103,7 @@ def mutationDataProcessing(inFileNames, outDir):
     # wfName0 = "C:\\Users\\scsac\\Desktop\\GATech\\GhosnLab\\VDJ\\Results_Prelims\\contigs_data.json"
     # with open(wfName0, 'w') as wFile:
     #     wFile.write(json.dumps(allContigDict))
-        
+    # write to region wise mutation json output    
     wfName1 = os.path.join(outDir, "region_data.json")
     with open(wfName1, 'w') as wFile:
         wFile.write(json.dumps(regionWiseInfo))
@@ -114,7 +114,7 @@ def mutationDataProcessing(inFileNames, outDir):
             csvDictWriter = csv.DictWriter(outFile, headers)
             csvDictWriter.writeheader()
             csvDictWriter.writerows(listDict)
-    
+    # outputs region wise mutation data - cumulative
     mutFilePaths = []
     wfNameCSV = os.path.join(outDir, "temp")
     for region in regionWiseInfo:
@@ -123,8 +123,8 @@ def mutationDataProcessing(inFileNames, outDir):
         outFilePath = os.path.join(wfNameCSV, outFName)
         mutFilePaths.append(outFilePath)
         writeToCSV(outFilePath, regionCellList)
-        
-    wfName2 = os.path.join(outDir, "hs_data.json")
+    # write to hotspot details region wise    
+    wfName2 = os.path.join(outDir, "Mutation_Data", "data", "hs_data.json")
     with open(wfName2, 'w') as wFile:
         wFile.write(json.dumps(hsTypeInfo))
     
