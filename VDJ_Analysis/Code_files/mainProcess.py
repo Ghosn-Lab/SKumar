@@ -15,11 +15,11 @@ def main():
     if len(sys.argv) == 1:
         print("Generate files for VDJ visualizations")
         print("Usage: python3 mainProcess.py [12345] [filename(s)] [out_directory]")
-        print("1:CDR3 AA, 2:ADT integration, 3:Circos, 4:CDR3 Mutations, 5:VDJ Comparisons")
+        print("1:CDR3 AA, 2:ADT integration, 3:Circos, 4:Hotspot mutation data by region, 5:VDJ Comparisons")
         print("Inputs for the modes in the order specified:")
         print("Mode 1: VDJ filtered matrix and output directory")
         print("Mode 2: ADT normalized matrix, IMGT processed mutation file, IMGT processed VDJ matrix and output directory")
-        print("Mode 3: IMGT processed VDJ matrix and output directory")
+        print("Mode 3: Lineage data processed VDJ matrix and output directory")
         print("Mode 4: IMGT processed mutation file, IMGT processed VDJ matrix and output directory")
         print("Mode 5: List of VDJ filtered matrices and output directory")
     else:
