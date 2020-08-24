@@ -45,17 +45,17 @@ function process_v(text) {
   x = d3.scaleLinear()
       .domain([0, d3.max(series, d => d3.max(d, d => d[1]))])
       .range([margin.left, width - margin.right])
-      console.log(x.range())
+      
   y = d3.scaleBand()
       .domain(data.map(d => d.name))
       .range([margin.top, height - margin.bottom])
       .padding(0.08)
   formatValue = x => isNaN(x) ? "N/A" : x.toLocaleString("en")
 
-  color = d3.scaleOrdinal()
-      .domain(series.map(d => d.key))
-      .range(d3.schemeSpectral[series.length])
-      .unknown("#ccc")
+  color = d3.scaleOrdinal(d3.schemeCategory10)
+      // .domain(series.map(d => d.key))
+      // .range(d3.schemeSpectral[series.length])
+      // .unknown("#ccc")
 
   xAxis = g => g
       .attr("transform", `translate(0,${margin.top})`)
@@ -108,17 +108,17 @@ function process_d(text) {
   x = d3.scaleLinear()
       .domain([0, d3.max(series, d => d3.max(d, d => d[1]))])
       .range([margin.left, width - margin.right])
-      console.log(x.range())
+
   y = d3.scaleBand()
       .domain(data.map(d => d.name))
       .range([margin.top, height - margin.bottom])
       .padding(0.08)
   formatValue = x => isNaN(x) ? "N/A" : x.toLocaleString("en")
 
-  color = d3.scaleOrdinal()
-      .domain(series.map(d => d.key))
-      .range(d3.schemeSpectral[series.length])
-      .unknown("#ccc")
+  color = d3.scaleOrdinal(d3.schemeCategory10)
+      // .domain(series.map(d => d.key))
+      // .range(d3.schemeSpectral[series.length])
+      // .unknown("#ccc")
 
   xAxis = g => g
       .attr("transform", `translate(0,${margin.top})`)
@@ -171,17 +171,17 @@ function process_j(text) {
   x = d3.scaleLinear()
       .domain([0, d3.max(series, d => d3.max(d, d => d[1]))])
       .range([margin.left, width - margin.right])
-      console.log(x.range())
+
   y = d3.scaleBand()
       .domain(data.map(d => d.name))
       .range([margin.top, height - margin.bottom])
       .padding(0.08)
   formatValue = x => isNaN(x) ? "N/A" : x.toLocaleString("en")
 
-  color = d3.scaleOrdinal()
-      .domain(series.map(d => d.key))
-      .range(d3.schemeSpectral[series.length])
-      .unknown("#ccc")
+  color = d3.scaleOrdinal(d3.schemeCategory10)
+      // .domain(series.map(d => d.key))
+      // .range(d3.schemeSpectral[series.length])
+      // .unknown("#ccc")
 
   xAxis = g => g
       .attr("transform", `translate(0,${margin.top})`)
